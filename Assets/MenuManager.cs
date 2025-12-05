@@ -10,12 +10,13 @@ public class MenuManager : MonoBehaviour
     public static int index = 0;
     public GameObject[] character;
     public GameObject[] characterPrefab;
+    public List<string> nameCharacter = new List<string>() { "Blue", "Purple", "Green" };
 
     private void Awake()
     {
         if (Instance == null)
         {
-            Instance = this;
+            Instance = this; 
         }
         else Destroy(gameObject);
     }

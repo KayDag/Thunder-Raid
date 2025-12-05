@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] int speed = 5;
+    [SerializeField] public int dmg = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +22,7 @@ public class Bullet : MonoBehaviour
         Enemy enemy = collision.gameObject.GetComponent<Enemy>();
         if (enemy != null)
         {
-            Destroy(enemy.gameObject);
+            enemy.health -= dmg;
             Destroy(gameObject);
         }
     }

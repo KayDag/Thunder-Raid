@@ -6,8 +6,8 @@ public class Shoot : MonoBehaviour
 {
     public Transform[] gunPower;
     public GameObject Bullet;
-    float timer = 0;
-    int cooldown = 3;
+    [SerializeField] float timer = 0;
+    [SerializeField] int cooldown = 1;
     // Start is called before the first frame update
     void Start()
     {

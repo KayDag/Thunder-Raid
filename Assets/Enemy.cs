@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    int health;
+    [SerializeField] protected int speed = 1;
+    [SerializeField] protected GameObject present;
+    public int health { get; set; }
     // Start is called before the first frame update
     void Start()
     {
@@ -18,9 +21,9 @@ public class Enemy : MonoBehaviour
     }
     protected virtual void Move() { }
     protected virtual void Shoot() { }
-    void Die()
+    protected virtual void Die()
     {
-        if (health == 0)
-            Destroy(gameObject);
+        Destroy(gameObject);
+        Instantiate(present, transform.position, Quaternion.identity);
     }
 }
