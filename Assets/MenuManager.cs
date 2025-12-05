@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,6 +12,10 @@ public class MenuManager : MonoBehaviour
     public GameObject[] characterPrefab;
     public List<string> nameCharacter = new List<string>() { "Blue", "Purple", "Green" };
 
+    public Canvas menuCanvas;
+    public Canvas highscoreCanvas;
+    public HighScoreUI highScoreUI;
+    public UserSavePointDatas userSavePointDatas;
     private void Awake()
     {
         if (Instance == null)
@@ -25,6 +29,7 @@ public class MenuManager : MonoBehaviour
     {
         index = 0;
         SelectCharactor();
+        ShowMenu();
     }
 
     // Update is called once per frame
@@ -36,10 +41,7 @@ public class MenuManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneKey.GameScene);
     }
-    public void HighScore()
-    {
-        SceneManager.LoadScene(SceneKey.ScoreScene);
-    }
+
     public void btnPrev()
     {
         index = (index == 0) ? character.Length - 1 : index - 1;
@@ -65,5 +67,33 @@ public class MenuManager : MonoBehaviour
                 character[i].GetComponent<SpriteRenderer>().color = Color.black;
             }
         }
+    }
+    public void ShowHighscore()
+    {
+        menuCanvas.gameObject.SetActive(false);
+        highscoreCanvas.gameObject.SetActive(true);
+
+        if (PlayerPrefs.HasKey("POINT_KEY"))
+        {
+            string jsonData = PlayerPrefs.GetString("POINT_KEY");
+            UserSavePointDatas userData = JsonUtility.FromJson<UserSavePointDatas>(jsonData);
+
+            if (userData.points == null)
+                userData.points = new List<int>();
+
+            highScoreUI.ShowScores(userData.points);
+        }
+        else
+        {
+            // chưa có dữ liệu thì hiển thị "-"
+            highScoreUI.ShowScores(new List<int>());
+        }
+    }
+
+
+    public void ShowMenu()
+    {
+        menuCanvas.gameObject.SetActive(true);
+        highscoreCanvas.gameObject.SetActive(false);
     }
 }

@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public int level;
     public int score;
-    private UserSavePointDatas userSavePointDatas;
+    public UserSavePointDatas userSavePointDatas;
     public string nameCharacter;
     public string time;
     private void Awake()
@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else Destroy(gameObject);
     }
@@ -25,7 +24,6 @@ public class GameManager : MonoBehaviour
     {
         level = 0;
         nameCharacter = MenuManager.Instance.nameCharacter[MenuManager.index];
-        time = DateTime.Now.ToString();
         if (PlayerPrefs.HasKey(UserDataKey.POINT_KEY))
         {
             string jsonData = PlayerPrefs.GetString(UserDataKey.POINT_KEY);
@@ -52,7 +50,7 @@ public class GameManager : MonoBehaviour
     public void AddStar(int amount)
     {
         score += amount;
-
+        time = DateTime.Now.ToString();
         //update điểm vào data scheme
         userSavePointDatas.UpdatePoints(score, nameCharacter, time);
         //lưu data vào player prefs
