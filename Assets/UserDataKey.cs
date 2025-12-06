@@ -5,5 +5,6 @@ using UnityEngine;
 public class UserDataKey : MonoBehaviour
 {
     public static string POINT_KEY = "Point";
+    public static string USER_KEY = "UserID";
 }
 

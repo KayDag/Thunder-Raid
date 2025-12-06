@@ -18,7 +18,7 @@ public class Plane : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        health = 10;
+        health = 2;
         sprite = GetComponent<SpriteRenderer>();
         GameObject prefab = MenuManager.Instance.characterPrefab[MenuManager.index];
         SpriteRenderer prefabRenderer = prefab.GetComponentInChildren<SpriteRenderer>();
@@ -28,7 +28,7 @@ public class Plane : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        IsDie();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -40,6 +40,11 @@ public class Plane : MonoBehaviour
     }
     public bool IsDie()
     {
-        return (health == 0);
+        if (health == 0)
+        {
+            Destroy(gameObject);
+            return true;
+        }
+        else return false;
     }
 }

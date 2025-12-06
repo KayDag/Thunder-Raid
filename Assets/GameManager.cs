@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
             if (userSavePointDatas == null)
             {
                 userSavePointDatas = new UserSavePointDatas();
+                score = 0;
             }
         }
         else
@@ -45,7 +46,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
     public void AddStar(int amount)
     {

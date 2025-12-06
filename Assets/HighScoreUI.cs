@@ -9,6 +9,8 @@ public class HighScoreUI : MonoBehaviour
 
     public void ShowScores(List<int> scores)
     {
+        scores.Sort();
+        scores.Reverse();
         for (int i = 0; i < scoreTexts.Length; i++)
         {
             if (i < scores.Count)
